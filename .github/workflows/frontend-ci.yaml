@@ -30,6 +30,7 @@ jobs:
         
       - name: Dependencies and Lint
         run: | 
+          cd starter/frontend
           npm ci
           npm run lint
 
@@ -47,13 +48,14 @@ jobs:
       - name: Cache Node.js
         uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: starter/frontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('starter/frontend/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
         
       - name: Dependencies and Test
         run: | 
+          cd starter/frontend
           npm ci
           npm run test
 
