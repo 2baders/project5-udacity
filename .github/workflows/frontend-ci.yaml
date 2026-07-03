@@ -1,7 +1,5 @@
 name: Frontend Continuous Integration
 
-
-
 on:
   workflow_dispatch:
   pull_request:
@@ -65,6 +63,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Cache Node.js
+        uses: actions/cache@v3
+        with:
+          path: starter/frontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies and test
+        run: |
+          cd starter/frontend
+          npm ci
+          CI=true npm test
 
       - name: Build Docker Image
         run: |
