@@ -49,7 +49,7 @@ jobs:
       - name: Build and Tag Docker Image
         run: |
           cd starter/frontend
-          docker build --build-arg REACT_APP_MOVIE_API_URL=<BACKEND_URL_HERE> -t ${{ steps.login-ecr.outputs.registry }}/frontend:${{ github.sha }} .
+          docker build --build-arg REACT_APP_MOVIE_API_URL=http://a6da210a72f424c628ae96d936ae3805-1258443996.us-east-1.elb.amazonaws.com -t ${{ steps.login-ecr.outputs.registry }}/frontend:${{ github.sha }} .
 
       - name: Push to ECR
         run: |
