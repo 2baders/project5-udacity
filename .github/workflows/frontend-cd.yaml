@@ -56,7 +56,7 @@ jobs:
           docker push ${{ steps.login-ecr.outputs.registry }}/frontend:${{ github.sha }}
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name <CLUSTER_NAME_HERE> --region us-east-1
+        run: aws eks update-kubeconfig --name cluster --region us-east-1
 
       - name: Deploy K8s
         run: |
